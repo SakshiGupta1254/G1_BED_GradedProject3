@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea#editor',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: true,
+  });
+</script>
+<nav class="navbar navbar-expand-md navbar-dark" style= "background-color: #007bff">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Ticket Tracker Application</a>
+		<a th:href="@{/tickets}" class="navbar-brand">
+					Tickets</a>
+<a th:href="@{/tickets/new}" class="navbar-brand">
+					New Ticket</a>
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+	</nav>
+<br>
+
+<br>
+	<div class = "container">
+		<div class = "row">
+			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class = "text-center"> Edit Ticket </h1>
+				<div class = "card-body">
+					<form th:action="@{/tickets/{id}(id=${ticket.id})}" th:object = "${ticket}" method="POST">
+						<div class ="form-group">
+							<label> Title</label>
+							<input
+							type = "text"
+							name = "ticketName"
+							th:field = "*{ticketName}"
+							class = "form-control"
+							placeholder="Ticket Title" 
+							/>
+						</div>
+						
+						<div class ="form-group">
+							<label> Short Description </label>
+							<textarea
+							type = "text"
+							name = "lastName"
+							th:field = "*{ticketShortDescription}"
+							class = "form-control"
+							placeholder="Enter Short Description" 
+							></textarea>
+						</div>
+
+<div class ="form-group">
+							<label> Content </label>
+							<textarea
+							id ="editor"
+							type = "text"
+							name = "Content"
+							th:field = "*{ticketDescription}"
+							class = "form-control"
+							placeholder="Content" 
+							></textarea>
+						</div>
+						
+						<div class = "box-footer">
+							<button type="submit" class = "btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
