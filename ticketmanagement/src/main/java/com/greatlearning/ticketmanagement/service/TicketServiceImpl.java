@@ -39,7 +39,7 @@ public class TicketServiceImpl implements TicketService{
 
 	@Override
 	public List<Ticket> getByKeyword(String query) {
-		    return repository.findBy(query);
+		    return repository.getByKeyword(query);
 	}
 
 

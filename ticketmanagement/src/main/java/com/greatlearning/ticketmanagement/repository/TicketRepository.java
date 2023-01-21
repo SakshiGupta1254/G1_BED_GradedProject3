@@ -11,8 +11,12 @@ import com.greatlearning.ticketmanagement.model.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 
-	 @Query("select s from Ticket s where s.ticketName=sakshi" )
+	 @Query(value = "SELECT * FROM tickets t WHERE " +
+	            "LOWER(t.ticket_name) LIKE LOWER(CONCAT('%',:query, '%')) OR " +
+	            "LOWER(t.ticket_short_desc) LIKE LOWER(CONCAT('%',:query, '%'))",
+	            nativeQuery = true
+	    )
 	
-	 public List<Ticket> findBy(String query);
+	 List<Ticket> getByKeyword(@Param("query") String query);
 
 }
